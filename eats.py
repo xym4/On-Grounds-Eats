@@ -1,4 +1,3 @@
-from itertools import cycle
 import re
 
 with open("LocationsAndTimes.txt") as f:
