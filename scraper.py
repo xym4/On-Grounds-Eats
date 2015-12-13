@@ -36,7 +36,7 @@ for link in location_links:
 	name = name[0].text.strip()
 
 	# First paragraph of page with , stripped of leading & trailing whitespaces, split into list by lines
-	stripped_p_list = all_p[hours_index].text.strip().replace("<br>", "").replace("</br>", "").replace("Midnight", "12:00 am").replace("Noon", "12:00 pm").split("\n")
+	stripped_p_list = all_p[hours_index].text.strip().replace("<br>", "").replace("</br>", "").replace("Midnight", "12:00 am").replace("Noon", "12:00 pm").replace(" & ", "-").split("\n")
 
 	# First line contains the hours of operation
 	hours = stripped_p_list[0]
