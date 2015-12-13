@@ -15,6 +15,8 @@ for a in navbar_links:
 	if address[1:9] == "Location":
 		location_links.append(address)
 
+f = open("LocationsAndTimes.txt", "w")
+
 # Parsing hours of operation from each food page
 for link in location_links:
 	food_url = "http://virginia.campusdish.com" + link
@@ -40,7 +42,7 @@ for link in location_links:
 	hours = stripped_p_list[0]
 	
 	# All hours of operations are on same line, like 'Monday-Friday: 7:30 am - 1:30 pmSaturday & Sunday: Closed', find indices of split with regex
-	regex_indices = [m.span() for m in re.finditer("[amp]{2}[MTWFS]{1}", hours)]
+	regex_indices = [m.span() for m in re.finditer("(am|pm|Closed)[MTWFS]{1}", hours)]
 	hours_list = []
 
 	# Splitting will remove letters, so iterate through and collect times instead
@@ -58,8 +60,9 @@ for link in location_links:
 			start = regex_indices[i][1]-1
 			final_hours.append(hours[start:].strip())
 
-	print(final_hours)
+	for i in range(0, len(final_hours)-1):
+		f.write(final_hours[i]+",")
+	f.write(final_hours[-1])
+	f.write("\n")
 
-
-
-
+f.close()
